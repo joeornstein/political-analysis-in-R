@@ -1,6 +1,7 @@
 name: "course-website"
 title: "Political Analysis in R"
 favicon: img/favicon_io/favicon.ico
+theme: theme.css
 description: |
   Political Analysis in R
 output_dir: "../../../projects/joeornstein.github.io/pols-3230/" # kludgily direct the output to your GitHub pages
