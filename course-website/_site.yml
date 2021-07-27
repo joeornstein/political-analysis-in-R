@@ -1,0 +1,17 @@
+name: "course-website"
+title: "Political Analysis in R"
+favicon: img/favicon_io/favicon.ico
+description: |
+  Political Analysis in R
+output_dir: "../../../projects/joeornstein.github.io/pols-3230/" # kludgily direct the output to your GitHub pages
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - icon: fa-favicon github
+      href: "https://github.com/joeornstein/political-analysis-in-R"
+output:
+  distill::distill_article:
+    toc: true

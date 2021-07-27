@@ -1,0 +1,21 @@
+---
+title: "Political Analysis in R"
+author:
+  - name: Joseph T. Ornstein 
+    url: https://joeornstein.github.io/
+    affiliation: University of Georgia
+    affiliation_url: https://spia.uga.edu/departments-centers/department-of-political-science/
+    orcid_id: 0000-0002-5704-2098
+description: |
+  The website for the course.
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Distill at:
+# https://rstudio.github.io/distill/website.html
+
+```
+
