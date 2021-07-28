@@ -38,5 +38,9 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# dross folder
+# dross folders
 _dross/
+_R/
+
+# selected data files
+data/students.csv
