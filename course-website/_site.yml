@@ -9,7 +9,9 @@ navbar:
   right:
     - text: "Home"
       href: index.html
-    - text: "About"
+    - text: "Syllabus"
+      href: syllabus/POLS-3230-syllabus.pdf
+    - text: "Content"
       href: about.html
     - icon: fas fa-book-open
       href: "https://hypothes.is/groups/eE6yBNm8/test-group"
