@@ -14,7 +14,7 @@ navbar:
     - text: "Content"
       href: about.html
     - icon: fas fa-book-open
-      href: "https://hypothes.is/groups/eE6yBNm8/test-group"
+      href: "https://hypothes.is/groups/oEioeZW4/pols-3230-fall-2021"
     - icon: fab fa-github
       href: "https://github.com/joeornstein/political-analysis-in-R"
 output:
