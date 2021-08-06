@@ -1,7 +1,7 @@
 ---
 title: "Political Analysis in R"
 author:
-  - name: Joseph T. Ornstein 
+  - name: Joe Ornstein 
     url: https://joeornstein.github.io/
     affiliation: University of Georgia
     affiliation_url: https://spia.uga.edu/departments-centers/department-of-political-science/
@@ -9,6 +9,7 @@ author:
 description: |
   The website for the course.
 site: distill::distill_website
+bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -19,19 +20,52 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-We'll learn stuff. Industry standard stuff.[^1]
+## Overview
 
-[^1]: For example, this very website was built with `R`. Powerful stuff.
+In this course, you'll learn how to work with data using the `R` programming language.[^1] By the end of the semester, you'll be able to:
+
+[^1]: `R` is a powerful (and in-demand!) tool for data analysis and communication. For example, this very website was built with `R`.
+
+-   Write code to read, tidy, and summarize datasets
+-   Create beautiful and informative data visualizations
+-   Draw thoughtful conclusions from data
+-   Organize your work so that it is transparent and reproducible
+
+All the course materials you need will be available on this website. Check the `Schedule` tab for an overview of each week's topics and assignments. On the navbar, you can also find links to [read the syllabus](syllabus/POLS-3230-syllabus.pdf), [schedule an office hours appointment](https://calendly.com/jornstein/15min), [read your classmates' comments on the readings](https://hypothes.is/groups/oEioeZW4/pols-3230-fall-2021), and [visit the class code repository](https://github.com/joeornstein/political-analysis-in-R).
 
 ## Getting Started
 
-Here's everything you need to get started.
+There is a *lot* of software to install for this class, but in the instructions below I've tried to make it as straightforward as possible. (And everything is free!) Before the end of our first week, please complete the following steps.
 
-### `R`
+![](img/wizard.jpg)
 
-For starters, you'll need `R`. The most current version is available [here](https://cloud.r-project.org/). To download, click link for your operating system (i.e. Mac, Windows, Linux), then click
+### R
 
-### Hypothesis
+You won't get super far in an `R` class without `R`. The most current version is available [here](https://cloud.r-project.org/). To download, click link for your operating system (i.e. Mac, Windows, Linux), then follow the instructions on the page.
+
+### RStudio
+
+`R` is the programming language itself, but it comes with a pretty unfriendly interface.
+
+![](img/rterm.png)
+
+You don't want to do all your typing in that lonely black box. Instead, you want **RStudio**, a piece of software that makes `R` *much* prettier. Download the RStudio Desktop version [here](https://www.rstudio.com/products/rstudio/download/#download).
+
+### Version Control: git
+
+Professional coders use a **version control system** called `git` to keep track of their code. If you're on a Mac, skip this section. Your machine already has it installed.[^2] If you use a PC, follow the installation instructions [here](https://git-scm.com/downloads).
+
+[^2]: I think? If you're on a Mac and you can't get git to work, let me know!
+
+Using `git` to track changes in your code involves a bit of struggle on the front end, but it is well worth it [@bryan2017].[^3] I'll walk you through the basics in class.
+
+[^3]: It's something you can put on your resume and people will be super impressed.
+
+### Reference Management: Zotero
+
+This software makes it blindingly simple to keep track of and format your citations. It also plays really nicely with RStudio. Download it [here](<https://www.zotero.org/>) and follow the setup instructions. The [Chrome extension](https://chrome.google.com/webstore/detail/zotero-connector/ekhagklcjbdpajgpjgmbionohlpdbjgc?hl=en) is particularly useful; anything you find on the Internet can be saved to your library with one click.
+
+### Social Annotation: Hypothesis
 
 This semester, we'll be using a **social annotation** platform called [Hypothesis](https://web.hypothes.is/). That way, everyone will be able to post comments/questions/concerns/memes directly into the reading assignments. Follow these steps to get started:
 
