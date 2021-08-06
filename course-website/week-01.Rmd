@@ -1,0 +1,27 @@
+---
+title: "Week 1"
+description: |
+  Getting all the software up and running.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+## Reading Assignments
+
+Before next week, please read and annotate the following:
+
+- [Healy Preface](https://socviz.co/index.html#preface) (and complete the package installation instructions at the bottom)
+- [Healy Chapter 2](https://socviz.co/gettingstarted.html#gettingstarted)
+
+## Team Project
+
+Find the file `R/week-01/team-project-1.Rmd` on our GitHub repository. Download it to your project folder, and make the following changes:
+
+1. Change the author metadata to list each person on your team.
+2. Modify the equation in the second code chunk so it computes 3 times 4.
+3. Knit to HTML.
+4. Submit the knitted HTML to eLC[^1] 
+
+[^1]: Everyone on the team needs to submit to eLC in order to receive credit, even if you worked together. (It just makes it easier for me. Thanks!)
