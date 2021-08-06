@@ -20,10 +20,10 @@ Before next week, please read and annotate the following:
 
 ## Team Project
 
-Find the file `R/week-01/team-project-1.Rmd` in our GitHub repository. Open it and make the following edits:
+Find the file `R/week-01/team-project-1.Rmd` in our GitHub repository. Open it and make the following changes:
 
-1. Change the author metadata to list each person on your team.
-2. Modify the equation in the second code chunk so it computes 3 times 4.
+1. Edit the author metadata to list each person on your team.
+2. Follow the instructions in each code chunk.
 3. Knit to HTML.
 4. Submit the knitted HTML document to eLC[^1] 
 
