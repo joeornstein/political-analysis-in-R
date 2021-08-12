@@ -8,7 +8,7 @@ description: |
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
-Up to now, we've been working with pre-tidied datasets. Every column is a variable, every row is an observation, and every value is where it should be. But things are not always this way. More often than you're going to like, data comes to you an unruly mess, and you'll need to tidy it up before you can even start to explore it.
+Up to now, we've been working with pretty tidy datasets. Every column is a variable, every row is an observation, and every value is where it should be. But things are not always this way. More often than you're going to like, data comes to you an unruly mess, and you'll need to tidy it up before you can even start to explore it.
 
 ![](img/horst_tidyverse.jpg)
 Over the next few weeks, we'll learn some of the most important functions in the `tidyverse` for data wrangling.
