@@ -1,7 +1,7 @@
 ---
 title: "Week 3"
 description: |
-  Only the fanciest data viz...
+  After this week, your charts will be *extremely* fancy
 ---
 
 ```{r setup, include=FALSE}
