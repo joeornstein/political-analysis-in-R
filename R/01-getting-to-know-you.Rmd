@@ -1,0 +1,205 @@
+---
+title: "Welcome to POLS 3230!"
+subtitle: "Political Analysis in `R`"
+#author: "Joe Ornstein"
+#institute: "University of Georgia"
+#date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+                      fig.height = 4, fig.width = 6, fig.align = 'center',
+                      out.width = '100%', fig.retina = 2)
+library(tidyverse) # so many useful functions!
+library(here) # functions for file management
+library(janitor) # functions for tidying up datasets
+library(zipcodeR) # functions for mapping zip codes
+library(ggthemes) # for pleasant visualization themes
+library(leaflet) # for interactive maps!
+library(geosphere) # functions for geographic data
+library(tidytext) # functions for text analysis
+library(wordcloud2) # for word clouds!
+library(broom) # functions for tidying regression tables
+```
+
+```{r load data}
+# load dataset
+d <- read_csv(here('data/students.csv')) %>% 
+  clean_names() %>%  # clean up variable names
+  mutate(zipcode = as.character(hometown_zip_code)) # make zipcode a character for geocoding
+
+# geocode the zipcodes
+zip_geocodes <- geocode_zip(d$zipcode)
+d <- left_join(d, zip_geocodes, by = 'zipcode')
+
+# if no zip code provided, check coordinates field
+d <- d %>% 
+  mutate(lng = if_else(is.na(lng), 
+                       str_split(hometown_coordinates,
+                                 pattern = ', ', simplify = TRUE)[,2] %>% 
+                         as.numeric,
+                       lng),
+         lat = if_else(is.na(lat), 
+                       str_split(hometown_coordinates,
+                                 pattern = ', ', simplify = TRUE)[,1] %>% 
+                         as.numeric,
+                       lat),
+         full_name = paste(first_name, last_name))
+```
+
+---
+
+class: center, middle
+
+# Height
+
+---
+
+## Height
+
+On average, we are `r floor(mean(d$height_inches) / 12)` feet, `r floor(mean(d$height_inches) %% 12)` inches tall.
+
+```{r height}
+# plot a histogram of heights
+ggplot(data = d) +
+  geom_histogram(mapping = aes(x=height_inches),
+                 color = 'black') +
+  theme_minimal() +
+  labs(x='Height (inches)', y=NULL)
+```
+
+---
+
+## Height
+
+```{r height and math, out.width='70%'}
+# does height correlate with coding comfort?
+ggplot(data = d) +
+  geom_point(mapping = aes(x=height_inches, y=comfort_with_coding)) +
+  theme_minimal() +
+  labs(x = 'Height (inches)', y = 'Comfort with Math')
+```
+
+---
+
+## Height
+
+```{r height and math 2, out.width = '70%'}
+# does height correlate with math comfort?
+ggplot(data = d,
+       mapping = aes(x=height_inches, y=comfort_with_coding)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = 'lm', se = FALSE) +
+  theme_minimal() +
+  labs(x = 'Height (inches)', y = 'Comfort with Math')
+
+# model math comfort as a function of height
+height_lm <- lm(comfort_with_coding ~ height_inches, data = d)
+slope <- round(height_lm$coefficients['height_inches'] * 12, 2)
+pval <- tidy(height_lm)$p.value[2]
+```
+
+--
+
+`r ifelse(slope >= 0, 'Taller', 'Shorter')` people seem to be more comfortable with math. On average, 1 additional foot of height is associated with `r slope` more points in math comfort. 
+
+--
+
+The probability that a relationship this strong could arise purely from chance is roughly `r round(pval * 100, 1)`%.
+
+---
+class: center, middle
+
+# Where You're From
+
+---
+
+## Where You're From
+
+```{r leaflet map, fig.height=6.5}
+# plot everyone on a leaflet
+d %>% 
+  leaflet() %>%  
+  addProviderTiles(providers$Esri.WorldGrayCanvas) %>% 
+  addCircleMarkers(lng = ~lng, lat = ~lat,
+                   radius = 1, color = '#BA0C2F',
+                   label = ~full_name)
+```
+
+---
+
+## Distance to Athens
+
+```{r compute distance}
+d$distance_to_athens_km <- distm(cbind(d$lng, d$lat), c(-83.36, 34) , fun = distHaversine)[,1] / 1000
+```
+
+The median student is `r median(d$distance_to_athens_km) %>% floor` km from their hometown, but the *average* student is `r mean(d$distance_to_athens_km) %>% floor %>% prettyNum(big.mark = ',')` km from their hometown.
+
+```{r distance, fig.height=5, fig.width=8}
+d %>% 
+  mutate(full_name = fct_reorder(full_name, -distance_to_athens_km)) %>% 
+  ggplot() +
+  geom_bar(mapping = aes(x=distance_to_athens_km, y = full_name,
+                         fill = distance_to_athens_km),
+          stat = 'identity', width = 0.4) +
+  #scale_x_log10(label=scales::comma_format(accuracy = 1)) +
+  scale_x_continuous(label = scales::comma_format(accuracy = 1)) +
+  scale_y_discrete() +
+  labs(x = 'Distance to Athens (km)', y = NULL) +
+  theme_minimal() +
+  guides(fill = 'none') +
+  scale_fill_gradient(low = 'gray', high = '#BA0C2F')
+```
+
+
+---
+
+class: center, middle
+
+# How You Feel
+
+---
+
+# How You Feel
+
+```{r text analysis}
+d_words <- d %>% 
+  # create a row for each word in `how_are_you_feeling`
+  unnest_tokens(word, how_are_you_feeling) %>% 
+  select(full_name, word) %>% 
+  # remove the stop words (i.e. boring words)
+  anti_join(get_stopwords()) %>% 
+  left_join(get_sentiments('bing')) %>% 
+  filter(!is.na(sentiment))
+
+# create word cloud
+p1 <- d_words %>% 
+  count(word) %>% 
+  rename(freq = n) %>% 
+  wordcloud2(color = 'random-dark', size = 0.35)
+
+# let +1 be a positive sentiment, and -1 be a negative sentiment; get everyone's sum
+people <- d_words %>% 
+  mutate(sentiment = case_when(sentiment == 'positive' ~ 1,
+                               sentiment == 'negative' ~ -1,
+                               TRUE ~ 0)) %>% 
+  group_by(full_name) %>% 
+  summarize(sentiment_score = sum(sentiment))
+
+p1
+```
+
+- `r sum(people$sentiment_score > 0)` `r if_else(sum(people$sentiment_score > 0) == 1, 'person expressed', 'people expressed')` more positive than negative feelings.
+- `r sum(people$sentiment_score < 0)` `r if_else(sum(people$sentiment_score < 0) == 1, 'person expressed', 'people expressed')` more negative than positive feelings, and
+- `r sum(people$sentiment_score == 0)` `r if_else(sum(people$sentiment_score == 0) == 1, 'person was', 'people were')` kinda neutral.
+
