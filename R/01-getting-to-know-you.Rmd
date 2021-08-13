@@ -13,9 +13,8 @@ output:
       countIncrementalSlides: false
 ---
 
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
-
-```{r setup, echo=FALSE}
+```{r setup, include = FALSE}
+options(htmltools.preserve.raw = FALSE) # https://stackoverflow.com/questions/65766516/xaringan-presentation-not-displaying-html-widgets-even-when-knitting-provided-t
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
                       fig.height = 4, fig.width = 6, fig.align = 'center',
                       out.width = '100%', fig.retina = 2)
@@ -34,8 +33,21 @@ library(broom) # functions for tidying regression tables
 ```{r load data}
 # load dataset
 d <- read_csv(here('data/students.csv')) %>% 
-  clean_names() %>%  # clean up variable names
-  mutate(zipcode = as.character(hometown_zip_code)) # make zipcode a character for geocoding
+  # clean up variable names
+  clean_names() %>%  
+  # make zipcode a character for geocoding
+  mutate(zipcode = as.character(hometown_zip_code)) %>%
+  # if the zip code only has four digits, at a leading zero
+  mutate(zipcode = if_else(nchar(zipcode) == 4, paste0('0', zipcode), zipcode)) %>%
+  # clean up the cats/dogs and beach/mountain preference strings; anything with a "c" is cats, anything with a "b" is beaches
+  mutate(cats_or_dogs = cats_or_dogs %>% 
+           str_to_lower %>% 
+           str_detect('c') %>% 
+           if_else(. , 'Cats', 'Dogs'),
+         beach_or_mountains = beach_or_mountains %>% 
+           str_to_lower %>% 
+           str_detect('b') %>% 
+           if_else(. , 'Beach', 'Mountains'))
 
 # geocode the zipcodes
 zip_geocodes <- geocode_zip(d$zipcode)
@@ -56,78 +68,22 @@ d <- d %>%
          full_name = paste(first_name, last_name))
 ```
 
+
+
 ---
 
 class: center, middle
 
-# Height
+# Where We're From
 
 ---
 
-## Height
-
-On average, we are `r floor(mean(d$height_inches) / 12)` feet, `r floor(mean(d$height_inches) %% 12)` inches tall.
-
-```{r height}
-# plot a histogram of heights
-ggplot(data = d) +
-  geom_histogram(mapping = aes(x=height_inches),
-                 color = 'black') +
-  theme_minimal() +
-  labs(x='Height (inches)', y=NULL)
-```
-
----
-
-## Height
-
-```{r height and math, out.width='70%'}
-# does height correlate with coding comfort?
-ggplot(data = d) +
-  geom_point(mapping = aes(x=height_inches, y=comfort_with_coding)) +
-  theme_minimal() +
-  labs(x = 'Height (inches)', y = 'Comfort with Math')
-```
-
----
-
-## Height
-
-```{r height and math 2, out.width = '70%'}
-# does height correlate with math comfort?
-ggplot(data = d,
-       mapping = aes(x=height_inches, y=comfort_with_coding)) +
-  geom_point(alpha = 0.5) +
-  geom_smooth(method = 'lm', se = FALSE) +
-  theme_minimal() +
-  labs(x = 'Height (inches)', y = 'Comfort with Math')
-
-# model math comfort as a function of height
-height_lm <- lm(comfort_with_coding ~ height_inches, data = d)
-slope <- round(height_lm$coefficients['height_inches'] * 12, 2)
-pval <- tidy(height_lm)$p.value[2]
-```
-
---
-
-`r ifelse(slope >= 0, 'Taller', 'Shorter')` people seem to be more comfortable with math. On average, 1 additional foot of height is associated with `r slope` more points in math comfort. 
-
---
-
-The probability that a relationship this strong could arise purely from chance is roughly `r round(pval * 100, 1)`%.
-
----
-class: center, middle
-
-# Where You're From
-
----
-
-## Where You're From
+## Where We're From
 
 ```{r leaflet map, fig.height=6.5}
-# plot everyone on a leaflet
+# plot everyone on a interactive leaflet map
 d %>% 
+  filter(!is.na(lat)) %>% 
   leaflet() %>%  
   addProviderTiles(providers$Esri.WorldGrayCanvas) %>% 
   addCircleMarkers(lng = ~lng, lat = ~lat,
@@ -143,7 +99,9 @@ d %>%
 d$distance_to_athens_km <- distm(cbind(d$lng, d$lat), c(-83.36, 34) , fun = distHaversine)[,1] / 1000
 ```
 
-The median student is `r median(d$distance_to_athens_km) %>% floor` km from their hometown, but the *average* student is `r mean(d$distance_to_athens_km) %>% floor %>% prettyNum(big.mark = ',')` km from their hometown.
+The median student is `r d$distance_to_athens_km %>% na.omit %>% median %>% floor %>% prettyNum(big.mark = ',')` km from their hometown, but the *average* student is `r d$distance_to_athens_km %>% na.omit %>% mean %>% floor %>% prettyNum(big.mark = ',')` km from their hometown.
+
+--
 
 ```{r distance, fig.height=5, fig.width=8}
 d %>% 
@@ -161,16 +119,76 @@ d %>%
   scale_fill_gradient(low = 'gray', high = '#BA0C2F')
 ```
 
+---
+
+class: center, middle
+
+# Personal Characteristics
+
+---
+
+## Personal Characteristics
+
+On average, we are `r floor(mean(d$height_inches) / 12)` feet, `r floor(mean(d$height_inches) %% 12)` inches tall.
+
+```{r height}
+# plot a histogram of heights
+ggplot(data = d) +
+  geom_histogram(mapping = aes(x=height_inches),
+                 color = 'black') +
+  theme_minimal() +
+  labs(x='Height (inches)', y='Frequency')
+```
+
+---
+
+## Personal Characteristics
+
+```{r height and math, out.width='100%'}
+ggplot(data = d) +
+  geom_point(mapping = aes(x=height_inches, y=comfort_with_coding),
+             alpha = 0.6) +
+  facet_grid(cats_or_dogs ~ beach_or_mountains) +
+  theme_bw() +
+  labs(x = 'Height (inches)', y = 'Comfort With Computer Code')
+```
+
+---
+
+## Personal Characteristics
+
+```{r height and math 2, out.width = '70%'}
+# does height correlate with math comfort?
+ggplot(data = d,
+       mapping = aes(x=height_inches, y=comfort_with_coding)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = 'lm', se = FALSE) +
+  theme_minimal() +
+  labs(x = 'Height (inches)', y = 'Comfort with Computer Code')
+
+# model math comfort as a function of height
+height_lm <- lm(comfort_with_coding ~ height_inches, data = d)
+slope <- round(height_lm$coefficients['height_inches'] * 12, 2)
+pval <- tidy(height_lm)$p.value[2]
+```
+
+--
+
+`r ifelse(slope >= 0, 'Taller', 'Shorter')` people seem to be more comfortable with computer coding. On average, 1 additional foot of height is associated with `r slope` additional points in comfort. 
+
+--
+
+The probability that a relationship this strong could arise purely from chance is roughly `r round(pval * 100, 1)`%.
 
 ---
 
 class: center, middle
 
-# How You Feel
+# How We Feel
 
 ---
 
-# How You Feel
+# How We Feel
 
 ```{r text analysis}
 d_words <- d %>% 
