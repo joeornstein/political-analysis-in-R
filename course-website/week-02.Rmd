@@ -1,29 +1,26 @@
 ---
 title: "Week 2"
 description: |
-  Our first data visualizations
+  The week we make our first data visualizations!
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
-This week, we will make sure that everything we need is installed and working on our computers. Make sure you've completed everything from the [Getting Started](index.html#getting-started) section on the home page.
+In its raw form, data is completely unintelligible -- it's just a bunch of numbers, and our brains aren't really good at juggling a bunch of numbers. But our brains are *extremely* good at seeing patterns in visual images. Well-crafted data visualizations take advantage of that fact to communicate lots of information in an aesthetically pleasing way. 
+
+![](img/ross.png)
+
+This week, we start building our own visualizations using the `ggplot2` package (a part of the `tidyverse`). It will take some time to learn all of the function syntax, so be patient with yourself. Once you get the hang of it, you'll have an endlessly flexible tool for exploring and communicating patterns in your data. Let's get started.
 
 ## Reading Assignments
 
 Before next week, please read and annotate the following:
 
-- [Healy Preface](https://socviz.co/index.html#preface) (and complete the package installation instructions at the bottom)
-- [Healy Chapter 2](https://socviz.co/gettingstarted.html#gettingstarted)
+- [Healy Chapter 3](https://socviz.co/makeplot.html)
+- [Healy Chapter 4](https://socviz.co/groupfacettx.html)
 
 ## Team Project
 
-Find the file `R/week-01/team-project-1.Rmd` in our GitHub repository. Open it and make the following changes:
-
-1. Edit the author metadata to list each person on your team.
-2. Follow the instructions in each code chunk.
-3. Knit to HTML.
-4. Submit the knitted HTML document to eLC[^1] 
-
-[^1]: Everyone on the team needs to submit to eLC in order to receive credit, even if you worked together. (It just makes it easier for me. Thanks!)
+TBD

@@ -1,0 +1,19 @@
+---
+title: "Week 3"
+description: |
+  After this week, your charts will be *extremely* fancy
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+This week, we expand our data visualization repertoire, exploring different kinds of data (e.g. distributions, change over time) and making our charts prettier and prettier.
+
+## Reading Assignments
+
+Before next week, please read and annotate [Wrangling Penguins](https://allisonhorst.shinyapps.io/dplyr-learnr/), by Allison Horst. You'll learn what to do when your data doesn't come to you *exactly* the way you want it. 
+
+## Team Project
+
+TBD
