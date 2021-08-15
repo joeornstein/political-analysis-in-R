@@ -40,7 +40,9 @@ vignettes/*.pdf
 
 # dross folders
 _dross/
-_R/
 
 # selected data files
 data/students.csv
+
+# xaringan intermediates
+R/week-01/libs/
