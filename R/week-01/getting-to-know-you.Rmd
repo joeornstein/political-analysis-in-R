@@ -1,9 +1,6 @@
 ---
 title: "Welcome to POLS 3230!"
 subtitle: "Political Analysis in `R`"
-#author: "Joe Ornstein"
-#institute: "University of Georgia"
-#date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
     lib_dir: libs
