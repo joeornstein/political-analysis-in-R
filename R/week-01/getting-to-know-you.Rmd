@@ -29,7 +29,7 @@ library(broom) # functions for tidying regression tables
 
 ```{r load data}
 # load dataset
-d <- read_csv(here('data/getting-to-know-you/Getting To Know You (POLS 3230) - Form Responses 1.csv')) %>% 
+d <- read_csv(here('data/getting-to-know-you/students.csv')) %>% 
   # clean up variable names
   clean_names() %>%  
   # make zipcode a character for geocoding
