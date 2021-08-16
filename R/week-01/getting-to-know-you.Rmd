@@ -29,19 +29,19 @@ library(broom) # functions for tidying regression tables
 
 ```{r load data}
 # load dataset
-d <- read_csv(here('data/students.csv')) %>% 
+d <- read_csv(here('data/getting-to-know-you/Getting To Know You (POLS 3230) - Form Responses 1.csv')) %>% 
   # clean up variable names
   clean_names() %>%  
   # make zipcode a character for geocoding
-  mutate(zipcode = as.character(hometown_zip_code)) %>%
+  mutate(zipcode = as.character(hometown_zip_code_us)) %>%
   # if the zip code only has four digits, at a leading zero
   mutate(zipcode = if_else(nchar(zipcode) == 4, paste0('0', zipcode), zipcode)) %>%
   # clean up the cats/dogs and beach/mountain preference strings; anything with a "c" is cats, anything with a "b" is beaches
-  mutate(cats_or_dogs = cats_or_dogs %>% 
+  mutate(cats_or_dogs = do_you_prefer_cats_or_dogs %>% 
            str_to_lower %>% 
            str_detect('c') %>% 
            if_else(. , 'Cats', 'Dogs'),
-         beach_or_mountains = beach_or_mountains %>% 
+         beach_or_mountains = do_you_prefer_the_beach_or_the_mountains %>% 
            str_to_lower %>% 
            str_detect('b') %>% 
            if_else(. , 'Beach', 'Mountains'))
@@ -53,21 +53,23 @@ d <- left_join(d, zip_geocodes, by = 'zipcode')
 # if no zip code provided, check coordinates field
 d <- d %>% 
   mutate(lng = if_else(is.na(lng), 
-                       str_split(hometown_coordinates,
+                       str_split(hometown_coordinates_if_you_dont_have_a_home_zip_code,
                                  pattern = ', ', simplify = TRUE)[,2] %>% 
                          as.numeric,
                        lng),
          lat = if_else(is.na(lat), 
-                       str_split(hometown_coordinates,
+                       str_split(hometown_coordinates_if_you_dont_have_a_home_zip_code,
                                  pattern = ', ', simplify = TRUE)[,1] %>% 
                          as.numeric,
                        lat),
          full_name = paste(first_name, last_name))
+
+# give some variables shorter names
+d <- d %>% 
+  rename(height_inches = what_is_your_height_in_inches,
+         comfort_with_coding = how_comfortable_are_you_with_computer_code,
+         how_are_you_feeling = how_are_you_feeling_about_this_semester)
 ```
-
-
-
----
 
 class: center, middle
 
@@ -216,5 +218,5 @@ p1
 
 - `r sum(people$sentiment_score > 0)` `r if_else(sum(people$sentiment_score > 0) == 1, 'person expressed', 'people expressed')` more positive than negative feelings.
 - `r sum(people$sentiment_score < 0)` `r if_else(sum(people$sentiment_score < 0) == 1, 'person expressed', 'people expressed')` more negative than positive feelings, and
-- `r sum(people$sentiment_score == 0)` `r if_else(sum(people$sentiment_score == 0) == 1, 'person was', 'people were')` kinda neutral.
+- `r nrow(d) - nrow(people)` `r if_else(nrow(d) - nrow(people) == 1, 'person was', 'people were')` kinda neutral.
 

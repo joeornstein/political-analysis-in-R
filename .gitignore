@@ -42,7 +42,7 @@ vignettes/*.pdf
 _dross/
 
 # selected data files
-data/students.csv
+data/getting-to-know-you/
 
 # xaringan intermediates
 R/week-01/libs/
