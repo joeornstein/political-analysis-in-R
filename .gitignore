@@ -44,8 +44,5 @@ _dross/
 # raw data
 data/raw/
 
-# selected data files
-data/getting-to-know-you/
-
 # xaringan intermediates
 R/week-01/libs/
