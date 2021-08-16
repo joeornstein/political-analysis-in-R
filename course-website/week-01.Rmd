@@ -12,7 +12,9 @@ This week, we'll make sure that everything we need is installed and working on o
 
 ## Introductions
 
-On the first day, we'll begin by collecting and analyzing some data about the class. Please complete the following survey.
+On the first day, we'll begin by collecting and analyzing some data about the class. Please complete the following survey.[^survey]
+
+[^survey]: If the embedded survey isn't working for some reason, click [here](https://docs.google.com/forms/d/e/1FAIpQLScEzkhsA5Wpk3P5TUh7vlvOs4H2I529JUfKIZE7JVv1uMYzuw/viewform?usp=sf_link).
 
 ```{r survey}
 knitr::include_url('https://docs.google.com/forms/d/e/1FAIpQLScEzkhsA5Wpk3P5TUh7vlvOs4H2I529JUfKIZE7JVv1uMYzuw/viewform?usp=sf_link')
