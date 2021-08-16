@@ -10,6 +10,16 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 This week, we'll make sure that everything we need is installed and working on our computers. To begin, please complete the instructions in the [Getting Started](index.html#getting-started) section on the home page.
 
+## Introductions
+
+On the first day, we'll begin by collecting and analyzing some data about the class. Please complete the following survey.
+
+```{r survey}
+knitr::include_url('https://docs.google.com/forms/d/e/1FAIpQLScEzkhsA5Wpk3P5TUh7vlvOs4H2I529JUfKIZE7JVv1uMYzuw/viewform?usp=sf_link')
+```
+
+The responses will be available [here](https://docs.google.com/spreadsheets/d/16ypLtjvU_xzGKjRGKkOlQTfPgBppFUBTjOX0qYgkPwE/edit?resourcekey#gid=100775541).
+
 ## Reading Assignments
 
 Before next week, please read and annotate the following:
