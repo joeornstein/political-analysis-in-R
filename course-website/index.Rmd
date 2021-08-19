@@ -61,6 +61,14 @@ Professional coders use a **version control system** called `git` to keep track 
 
 [^2]: I think? If you're on a Mac and you can't get git to work, let me know!
 
+Once `git` is installed, it will want you to introduce yourself. To do so, follow these three steps:
+
+1\. In RStudio, click \`Tools \> Shell\`. This will open your computer's [shell](https://happygitwithr.com/shell.html), a program that runs other programs.
+
+2\. Type and enter `git config --global user.name 'Jane Doe'` (substituting your name for Jane Doe).
+
+3\. Type and enter `git config --global user.email 'jane@example.com'` (substituting your email for that fake email address).
+
 Using `git` to track changes in your code involves a bit of struggle on the front end, but it is well worth it [@bryan2017].[^3] I'll walk you through the basics in class.
 
 [^3]: It's something you can put on your resume and people will be super impressed.

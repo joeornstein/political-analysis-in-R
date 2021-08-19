@@ -1,4 +1,32 @@
 Timestamp,Last Name,First Name,Hometown Zip Code (US),Hometown Coordinates (if you don't have a home zip code),Do you prefer cats or dogs?,Do you prefer the beach or the mountains?,What is your height (in inches)?,How comfortable are you with computer code?,How are you feeling about this semester?,What topics or datasets would you be interested in exploring this semester?
-8/16/2021 14:31,Fillmore,Mallard,30601,,Dogs,Beach,56,6,I'm excellent thanks for asking,
-8/16/2021 15:43,Ornstein,Joe,29449,,Dogs,Mountains,70,10,Super,
-8/16/2021 15:46,Stewart,French,,"45.32930566396206, 1.2696263227303064",Cats,Mountains,60,0,Confused,
+8/18/2021 13:50:38,Ragan,Tori,30339,,Cats,Mountains,62,2,Scared about coding.,
+8/18/2021 13:51:19,Bayer,Gwendolyn,98502,,Dogs,Beach,62,6,feeling good! all profs seem really cool this semester.,international affairs topics & hot topics in politics (new politics)
+8/18/2021 13:51:23,Ornstein,Joe,29449,,Dogs,Mountains,70,10,"Excited! But also a little nervous...this is my first time doing this particular survey trick, and I worry that it might not work? It will probably work. It's cool.",
+8/18/2021 13:51:32,Clark,Zoe,30281,,Dogs,Beach,63,2,I am feeling very excited about this semester and being in person for classes.,I would like to look into the criminal justice systems data.
+8/18/2021 13:51:44,Shannon,Micah,30606,,Cats,Mountains,69,5,Excited,Public opinion about policy primarily. Really anything about politics and public policy.
+8/18/2021 13:51:54,Gilbert,Zach,30252,"33.46406403946892, -84.02279551756175",Dogs,Mountains,72,3,I feel pretty good about this semester. Excited to get back in the classroom.,Electoral odds based off of polling data.
+8/18/2021 13:52:02,Kerber,Anna,30004,,Cats,Mountains,64,5,Just fine so far,Maybe the death penalty?
+8/18/2021 13:52:12,David,Jacob,30025,,Cats,Mountains,71,7,I am happy to be back in-person this semester,I am interested on data sets regarding elections and polling
+8/18/2021 13:52:17,Beitzell,Ryan,30004,"34.17031883169693, -84.326435879957",Cats,Mountains,71,4,"I am really excited. Coding is a skill I feel like I want to have, but have never gotten around to actually learning. R seems to be a great introduction into code, and will help tremendously in future endeavors.",RCV election results...that would be nice.
+8/18/2021 13:52:26,Duncan,Parker,30041,,Dogs,Beach,72,6,I am excited. I am glad to be back in person!,Honestly I am looking forward to whatever. I am an easy going person so hopefully that works well with this class!
+8/18/2021 13:52:29,Payne,Stroud,30044,,Cats,Mountains,70,8,"I feel pretty good about this semester. I have some experience with R, so I hope I won't need to do any catching up.",I would like to work with datasets on polling and elections.
+8/18/2021 13:52:37,Reece,Jay,30525,,Dogs,Mountains,70,2,pretty good,Election polls
+8/18/2021 13:52:47,Snyder,Jacob,31023,,Cats,Mountains,71,5,I am hopeful to finally be back in in-person classes for my senior year.,I'm interested in quantitative data on how individuals self-report their voting habits vs how they actually vote.
+8/18/2021 13:52:57,Petrella,Cody,30052,,Dogs,Mountains,73,3,"I am optimistic about every class except for Spanish. I simply do not enjoy it. I am excited for a normal football season, normal of course meaning a late season letdown we can witness in-person. ","sports statistics (baseball of course), weather, election polling"
+8/18/2021 13:53:02,Stanford,Tori,22601,-- NA,Dogs,Beach,67,3,"I am excited but nervous as well. I have never taken a coding class or anything remotely like it, so this will be a whole new territory for me! ",I would like to learn basically anything that correlates to political science that would be helpful for future success in this area. 
+8/18/2021 13:53:07,stump,hannah,37604,,Dogs,Beach,66,1,nervous about adjusting to class back on campus but excited to get back to how things used to be,not really sure. this sort of stuff is new to me.
+8/18/2021 13:53:35,McDonough,Abbey,30062,,Dogs,Beach,68,4,"I am excited for this semester, but I am feeling nervous and overwhelmed because my classes see extremely difficult. I am grateful for in person classes and not having to learn over a zoom screen.",Political opinions based on the current Afghanistan situation.
+8/18/2021 13:53:37,Dy'Amond,Mc Ghee,31321,,Dogs,Beach,62,5,???,
+8/18/2021 13:53:52,Kiefer,Abby,31005,,Dogs,Mountains,66,6,Glad to be back in person! Hoping to not have to go back online.,I'm really interested in databases about contentious events
+8/18/2021 13:54:10,Jones,Nick,30017,"33.88912332398799, -83.96817919619107",Dogs,Beach,71,5,"Lowkey, I'm ready to get this over with and graduate ",I'm down for whatever 
+8/18/2021 13:54:21,Williams,Tanisha,30087,,Dogs,Beach,63,2,Very excited to be back this semester. Even though I am a senior I feel like a freshmen. But we shall how it goes :),Different gender roles?
+8/18/2021 13:54:24,Bertrand,Levi,31047,,Dogs,Mountains,71,0,Ok,war
+8/18/2021 13:54:51,Mitchell,William,30062,"33.952072947792956, -84.55610790596164",Cats,Beach,72,2,"I am a little apprehensive about this course since I have very little experience with writing computer code.  However, I am very interested in politics and political science, and I am excited to gain a better understanding of these topics through this class.",I think it would be interesting to analyze datasets that have to do with specific voting patters in certain areas. I think that the analysis of ideological and social differences in different voting precincts could help explain the outcomes of various contentious elections.
+8/18/2021 13:54:55,Golod,Andrew,30005,,Dogs,Mountains,77,3,"Grateful to be back in the classroom. Solitary confinement for work and school is no fun. I have an elementary understanding of the principals and am decent with SQL queries, but I'm very interested to see it applied to political data sets.  ","- GA/Federal voting patterns
+- Socio-economic predictive analysis
+- Demographic analysis"
+8/18/2021 13:54:58,Thomas ,Quin,31082,"32.9815° N, 82.8101° W",Dogs,Beach,66,0,"I am feeling excited for the semester, nervous because of the pressure to get it all done. #SeniorSzn",Race & Ethnicity in correlation to regional placement in the U.S. 
+8/18/2021 13:55:21,Dorsey,Andrew,30528,,Dogs,Mountains,65,5,Happy to be in person again!,Incumbency effect
+8/18/2021 13:55:25,Smallwood,Gabriel,30253,,Dogs,Beach,,1,"I want to have a positive mindset, but I also know that things could change at any time",I am interested in learning about demographics that are not usually explored 
+8/18/2021 13:56:00,Rajan,Reshi,35022,,Dogs,Mountains,75,4,"I am nervous, but also glad to be back in person. ","I don't really have a preference for data, I am just ecvited to do some data science work. "
+8/18/2021 13:56:05,HoChen,Lian,31410,,Dogs,Beach,64,0,"I feel good, still nervous about all of these new classes that I have little experience in but I'm excited!",I am interested in the connection between mass incarceration and disenfranchised areas
