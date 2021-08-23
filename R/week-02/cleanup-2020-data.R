@@ -28,3 +28,4 @@ counties_2020 <- read_csv('data/raw/county-2020/countypres_2000-2020.csv') %>%
          winner = if_else(biden_votes > trump_votes, 'Biden', 'Trump'))
 
 save(counties_2020, file = 'data/county-results-2020.RData')
+write_csv(counties_2020, file = 'data/county-results-2020.csv')

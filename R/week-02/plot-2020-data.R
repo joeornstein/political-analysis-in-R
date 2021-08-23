@@ -7,10 +7,6 @@
 
 library(tidyverse)
 
-load('data/county-results-2020.RData')
+d <- read_csv('data/county-results-2020.csv')
 
-ggplot(data = counties_2020) +
-  geom_point(mapping = aes(x=total_votes, y=percent_biden)) +
-  labs(x= 'Total Votes', y = 'Percent Biden')
-
-count(counties_2020, winner)
+count(d, winner)
