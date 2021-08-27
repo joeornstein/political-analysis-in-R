@@ -19,7 +19,7 @@ p <- ggplot(data = d,
             # map total_votes to the x-axis and percent_biden to the y-axis
             mapping = aes(x=total_votes, y=percent_biden)) +
   # this line add points
-  geom_point() +
+  geom_point(alpha = 0.6) +
   # this line puts the x-axis on a logarithmic scale
   scale_x_log10()
 
