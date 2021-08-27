@@ -23,4 +23,4 @@ Before next week, please read and annotate the following:
 
 ## Team Project
 
-TBD
+Locate the file `R/week-02/team-project-1.Rmd` in our code repository. Open it, complete the instructions therein, and submit to eLC by class on Monday.
