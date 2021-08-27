@@ -1,0 +1,78 @@
+---
+title: "Team Project 1"
+author: "YOUR NAMES HERE"
+date: "August 27, 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+# this line of code tells R not to put warning messages in the finished document 
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+
+library(tidyverse) # load the tidyverse
+library(scales) # load the scales library for prettier axis labels
+```
+
+## Introducing RMarkdown
+
+This is an RMarkdown document, which blends text and code into a single document. It's great for **reproducible analysis**, because it provides a complete step-by-step record of everything you did to generate your results!
+
+For example, the following *code chunk* produces a chart of the number of babies born in the United States with the name "Gertrude" between 1880 and 2017.
+
+```{r babies, echo=FALSE}
+
+library(babynames) # load the babynames library
+
+# find the Gertrudes
+gertrudes <- filter(babynames, name == 'Gertrude', sex == 'F')
+
+# plot them over time
+ggplot(data = gertrudes) +
+  # add points, where x-axis is mapped to year and y-axis is mapped to n 
+  geom_line(mapping = aes(x = year, 
+                          y = n)) +
+  # black and white theme
+  theme_bw() +
+  # axis labels
+  labs(x = 'Year', y = 'Number of Babies', title = 'Gertrudes over time',
+       caption = 'Data source: US Social Security Administration')
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing the R code that generated the plot.
+
+## The Project
+
+For your first team project, please load the county level election results and plot three states where the relationship between county population and Biden vote share is **strong**, and three states where the relationship appears **weak**.
+
+Here's a code chunk to load the data:
+
+```{r load data}
+d <- read_csv('https://raw.githubusercontent.com/joeornstein/political-analysis-in-R/main/data/county-results-2020.csv')
+```
+
+Here's a code chunk that plots only counties in the state of Alabama:
+
+```{r plot Alabama}
+# filter the data to include only the rows you want
+alabama <- filter(d, state == 'ALABAMA')
+
+# create a ggplot
+ggplot(data = alabama) +
+  # add points
+  geom_point(mapping = aes(x=total_votes, y=percent_biden/100),
+             alpha = 0.6) +
+  # put the x-axis on a logarithmic scale (so the data doesn't get all squished to the left)
+  scale_x_log10(labels = scales::comma) +
+  # add percent marks to the y-axis values
+  scale_y_continuous(label = scales::percent) +
+  # add a theme
+  theme_minimal() +
+  # add labels
+  labs(x = 'County Population', y = 'Biden Vote Share',
+       title = 'County Size and Democratic Vote Share (2020)',
+       subtitle = 'Alabama',
+       caption = 'Data Source: MIT Election Data + Science Lab')
+```
+
+The relationship seems pretty weak (even negative)! Now it's your turn. For each chart you want to produce, add a code chunk and modify the code so it will plot data from the state you want.
