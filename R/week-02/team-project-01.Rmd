@@ -2,7 +2,9 @@
 title: "Team Project 1"
 author: "YOUR NAMES HERE"
 date: "August 27, 2021"
-output: html_document
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
