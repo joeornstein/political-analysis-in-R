@@ -33,7 +33,8 @@ library(scales)
 
 p <- ggplot(data = d,
             # map total_votes to the x-axis and percent_biden to the y-axis
-            mapping = aes(x=total_votes, y=percent_biden/100)) +
+            mapping = aes(x=total_votes, y=percent_biden/100,
+                          color = winner)) +
   # this line add points (alpha = 0.3 makes the points semi-transparent)
   geom_point(alpha = 0.3) +
   # this line puts the x-axis on a logarithmic scale
@@ -47,6 +48,9 @@ p <- ggplot(data = d,
        title = 'County-Level Election Results (2020)',
        caption = 'Fun fact: half of the people who voted in 2020 live in the 152 counties to the right of the dotted line') +
   # this next line adds a vertical dotted line to the plot
-  geom_vline(xintercept = 225920, linetype = 'dotted')
+  geom_vline(xintercept = 225920, linetype = 'dotted') +
+  scale_color_manual(values = c('blue', 'red'))
 
 p
+
+ggsave(filename = 'facets.png', width = 12, height = 15)
