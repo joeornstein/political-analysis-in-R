@@ -8,14 +8,16 @@ library(tidyverse)
 library(socviz)
 
 # keep only the rows with US data
-d <- filter(boomer, country == 'United States')
-
-# create ggplot object, mapping the month to x and number of births to y
-p <- ggplot(data = d,
-       mapping = aes(x=date, y=births)) +
+boomer %>% 
+  filter(country == 'United States') %>%
+  ggplot(mapping = aes(x=date, y=births)) +
   geom_line() +
   theme_bw() +
-  geom_vline(xintercept = as.Date('1945-08-015') + 9*30,
+  geom_vline(xintercept = as.Date('1945-08-15') + 9*30,
              linetype = 'dashed')
+  
+
+# create ggplot object, mapping the month to x and number of births to y
+
 
 p
