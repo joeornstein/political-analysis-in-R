@@ -1,7 +1,7 @@
 # ---
 # title: Plot reported COVID-19 cases in Clarke County
 # author: Joe Ornstein
-# date: 2021-08-15
+# date: 2021-09-01
 # version: 1.0
 # ---
 
@@ -12,12 +12,12 @@ library(tidyverse)
 ## 2. Get Data ---------
 
 # read data from the NYT repository
-d <- read_csv('https://github.com/nytimes/covid-19-data/raw/master/us-counties.csv')
+nyt <- read_csv('https://github.com/nytimes/covid-19-data/raw/master/us-counties.csv')
 
 # clean up data
-d <- d %>% 
+d <- nyt %>% 
   # keep Clarke county
-  filter(county == 'Clarke', state == 'Georgia') %>% 
+  filter(fips == 13059) %>% 
   # create new_cases variable (total cases minus the number of cases from the day before)
   arrange(date) %>% 
   mutate(new_cases = cases - lag(cases))
