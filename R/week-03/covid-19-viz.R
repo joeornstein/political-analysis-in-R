@@ -17,7 +17,7 @@ nyt <- read_csv('https://github.com/nytimes/covid-19-data/raw/master/us-counties
 # clean up data
 d <- nyt %>% 
   # keep Clarke county
-  filter(fips == 13059) %>% 
+  filter(fips == '29093') %>% 
   # create new_cases variable (total cases minus the number of cases from the day before)
   arrange(date) %>% 
   mutate(new_cases = cases - lag(cases))
@@ -36,6 +36,6 @@ d %>%
   theme_minimal() +
   # label the axes and add a title
   labs(x = 'Date', y = 'New Cases',
-       title = 'Athens-Clarke County, GA') +
+       title = 'Iron County, MO') +
   # format the x-axis so it displays pretty dates
   scale_x_date(date_labels = '%B %Y')
