@@ -16,4 +16,4 @@ Before next week, please read and annotate [Wrangling Penguins](https://allisonh
 
 ## Team Project
 
-TBD
+Create a bar chart from a categorical variable in the CES dataset. Facet by two other categorical variables. Make it pretty. Save the chart with `ggsave()` and submit the image plus the R script that produced it to eLC.
