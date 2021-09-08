@@ -4,7 +4,7 @@
 # ---
 
 # Fix the code below so that it produces the chart at R/week-04/practice-quiz-1.png
-# There are seven errors; see if you can find and fix them all.
+# There are eight errors. See if you can find and fix them all!
 # HINT: Go line by line. Make sure you know what each line of code is doing and 
 # whether all the syntax, spellings, and parentheses are right. 
 
