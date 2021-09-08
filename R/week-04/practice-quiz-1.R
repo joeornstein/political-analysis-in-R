@@ -9,7 +9,7 @@
 # whether all the syntax, spellings, and parentheses are right. 
 
 # load the libraries you need
-library(tidyverse)
+library(tidyvers)
 library(gapminder)
 library(scales)
 
