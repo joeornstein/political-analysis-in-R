@@ -21,6 +21,10 @@ navbar:
           href: week-03.html
         - text: "Week 4: Data Wrangling"
           href: week-04.html
+        - text: "Week 5: Relational Data"
+          href: week-05.html
+        - text: "Week 6: The Complete Pipeline"
+          href: week-06.html
     - icon: fas fa-calendar-plus
       href: https://calendly.com/jornstein/15min
     - icon: fas fa-book-open
