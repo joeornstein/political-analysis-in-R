@@ -24,4 +24,12 @@ Next week, we start making maps! Before then, please read:
 
 Reproduce Figure 1.8 (or Figure 1.9, your choice) from [Chapter 1](https://socviz.co/lookatdata.html) of the Healy book. You can ignore the shaded confidence interval, but add six countries not included in the original plot.[^fn1] Write a report in RMarkdown including your chart, and submit the report to eLC as a knitted PDF. 
 
+To get PDF knitting working, first enter these two commands into your RStudio console:
+
+```
+install.packages('tinytex')
+tinytex::install_tinytex()
+```
+
+
 [^fn1]: I want to know what this trend looks like in, for example, non-democratic countries! 
