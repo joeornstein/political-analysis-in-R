@@ -1,0 +1,66 @@
+---
+title: "R Markdown Demo"
+author: "Joe Ornstein"
+date: "9/22/2021"
+output: pdf_document
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+# this line of code ensures error messages don't get included in the final report
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+## R Markdown
+
+This is an R Markdown document. It's great for writing a report along with your code so that everything is in one place. When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks [@foa2017] within the document. You can embed an R code chunk like this:
+
+```{r cars}
+library(tidyverse)
+```
+
+## Importing Data
+
+R Markdown always looks for files relative to the folder where it is saved. This can sometimes be a pain. For example, this .Rmd file is in the `R/week-06/` folder, but I want to load a data file in the `data/` folder. The `here()` function is useful, because it tells R to look for things relative to your `.Rproj` file instead (you'll need to install the `here` package if you don't have it).
+
+```{r import-data, echo = TRUE}
+library(here)
+
+load( here( 'data/county-results-2020.RData' ) )
+
+```
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r county-plot, echo=FALSE}
+library(scales) 
+
+p <- ggplot(data = counties_2020,
+            # map total_votes to the x-axis and percent_biden to the y-axis
+            mapping = aes(x=total_votes, y=percent_biden/100,
+                          color = winner)) +
+  # this line add points (alpha = 0.3 makes the points semi-transparent)
+  geom_point(alpha = 0.3) +
+  # this line puts the x-axis on a logarithmic scale
+  scale_x_log10(labels = comma) +
+  # this line formats the y-axis labels so they are percentages
+  scale_y_continuous(labels = percent) +
+  # this line gives the plot a different theme
+  theme_bw() +
+  # this line makes the labels prettier
+  labs(x = 'Total Votes', y = 'Biden Vote Share',
+       title = 'County-Level Election Results (2020)',
+       caption = 'Fun fact: half of the people who voted in 2020 live in the 152 counties to the right of the dotted line') +
+  # this next line adds a vertical dotted line to the plot
+  geom_vline(xintercept = 225920, linetype = 'dotted') +
+  scale_color_manual(values = c('blue', 'red'))
+
+p
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## References
