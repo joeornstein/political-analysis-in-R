@@ -38,3 +38,20 @@ p <- ggplot(data = d,
   geom_polygon()
 
 p
+
+
+# fancier version
+p +
+  # colors that go from red to blue, with gray in the middle
+  scale_fill_gradient2(low = party_colors[2],
+                       high = party_colors[1],
+                       mid = 'gray',
+                       midpoint = 50) +
+  # a better theme
+  theme_map() +
+  # a better map projection
+  coord_map(projection = 'albers', 
+            lat0 = 39, lat1 = 45) +
+  # add labels
+  labs(title = 'County-level US presidential election results (2020)',
+       fill = 'Biden Two-Party Vote Share')
