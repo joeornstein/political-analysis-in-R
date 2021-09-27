@@ -25,6 +25,8 @@ navbar:
           href: week-05.html
         - text: "Week 6: The Complete Pipeline"
           href: week-06.html
+        - text: "Week 7: Drawing Maps"
+          href: week-07.html
     - icon: fas fa-calendar-plus
       href: https://calendly.com/jornstein/15min
     - icon: fas fa-book-open
