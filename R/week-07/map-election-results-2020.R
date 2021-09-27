@@ -11,7 +11,7 @@ library(tidyverse)
 library(ggthemes) # for extra ggplot themes
 
 # next, load the county-level data (see R/week-02/cleanup-2020-data.R)
-load('data/county-results-2020.RData')
+load('data/county-results-2020-for-map.RData')
 
 # get the map data
 map_data <- map_data('county') 
