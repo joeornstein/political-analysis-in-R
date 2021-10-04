@@ -8,6 +8,7 @@
 
 # first, we load the packages we need
 library(tidyverse)
+library(ggthemes) # for the theme_map() layer
 library(sf) # functions for working with spatial data
 library(tigris) # for map data from the US Census
 library(leaflet) # for interactive maps
@@ -31,10 +32,28 @@ counties_2020 <- mutate(counties_2020,
 d <- left_join(county_map, counties_2020, by = 'fips')
 
 
-## Step 2: Make the map! -----------------------
+## Step 2: Make the map with ggplot! -----------------------
+
+# when working with sf objects, we can still make maps with
+# ggplot, using the geom_sf() layer
 
 # define the hex color codes for Democratic Blue and Republican Red
 party_colors <- c("#CB454A", 'gray', "#2E74C0") 
+
+ggplot(data = d,
+       mapping = aes(fill = percent_biden)) +
+  geom_sf() +
+  scale_fill_gradient2(low = party_colors[1],
+                       mid = party_colors[2],
+                       high = party_colors[3],
+                       midpoint = 50) +
+  theme_map() +
+  theme(legend.position = 'bottom') +
+  labs(fill = 'Biden Two-Party Vote Share')
+
+
+## Step 3: Make the map with leaflet! -----------------
+
 
 # here's a basic leaflet without embellishment
 # (notice pipes between layers instead of ggplot's plus signs)
