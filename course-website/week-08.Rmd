@@ -1,0 +1,106 @@
+---
+title: "Week 8"
+description: |
+  Fancy Maps
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+options(tigris_use_cache = TRUE)
+```
+
+This week, we'll make our maps zoom-able and interactive with the `leaflet` package.
+
+## Sample Code
+
+Here's a demonstration, plotting the county-level 2020 presidential election results for each county in Georgia.[^1] First, load all the packages we need:
+
+[^1]: All the code is available on the repository at `R/week-08/interactive-map-election-results-2020.R`.
+
+```{r load-packages}
+library(tidyverse)
+library(ggthemes) # for the theme_map() layer
+library(sf) # functions for working with spatial data
+library(tigris) # for map data from the US Census
+library(leaflet) # for interactive maps
+```
+
+Next, we'll get our map data from the `tigris` package. The format of this data is called a Simple Feature, or `sf` object. It is a more compact way of representing GIS data, and is quickly becoming the standard way to do things.
+
+```{r load-data}
+county_map <- counties('Georgia')
+
+head(county_map)
+```
+
+Notice that this may take a little while, because it's downloading the shape data from the Census. Next we'll merge that map data with the county-level election results.
+
+```{r merge}
+# load data from project folder
+load('../data/county-results-2020-for-map.RData')
+
+# we're going to merge by fips code, so 
+# make sure that the fips code in each dataset
+# is named the same thing and is in the same format
+county_map <- mutate(county_map, 
+                     fips = as.numeric(GEOID))
+
+counties_2020 <- mutate(counties_2020,
+                        fips = as.numeric(county_fips))
+
+# join the map data and the election results data together
+d <- left_join(county_map, counties_2020, by = 'fips')
+```
+
+We can plot `sf` objects with `ggplot` using the `geom_sf()` layer.
+
+```{r ggplot}
+# define the hex color codes for Democratic Blue and Republican Red
+party_colors <- c("#CB454A", 'gray', "#2E74C0") 
+
+ggplot(data = d,
+       mapping = aes(fill = percent_biden)) +
+  geom_sf() +
+  scale_fill_gradient2(low = party_colors[1],
+                       mid = party_colors[2],
+                       high = party_colors[3],
+                       midpoint = 50) +
+  theme_map() +
+  theme(legend.position = 'bottom') +
+  labs(fill = 'Biden Two-Party Vote Share')
+```
+
+And we can make an interactive map with `leaflet()`. See [here](https://rstudio.github.io/leaflet/choropleths.html#adding-some-color) for instructions on modifying the color palette, and [here](http://leaflet-extras.github.io/leaflet-providers/preview/index.html) for the complete list of base maps you can add.
+
+```{r leaflet}
+
+# create the color scheme
+pal <- colorNumeric(
+  palette = party_colors,
+  domain = d$percent_biden)
+
+p <- leaflet(data = d) %>% 
+  # add the county polygons, with fill color based on Biden vote share and label with county name
+  addPolygons(fillColor = ~pal(percent_biden),
+              weight = 1,
+              opacity = 1,
+              color = 'white',
+              fillOpacity = 0.7,
+              label = d$NAME) %>% 
+  # add a basemap
+  addProviderTiles(providers$Esri.WorldGrayCanvas) %>% 
+  # add a legend
+  addLegend(pal = pal, values = ~percent_biden,
+            opacity = 0.7, title = NULL,
+            position = 'bottomright')
+
+p
+```
+
+## Reading Assignments
+
+Next week, we discuss the challenges and opportunities presented by data that is collected across multiple time periods. To prepare, please read and annotate [Chapter 16](https://r4ds.had.co.nz/dates-and-times.html) of *R For Data Science*.
+
+## Team Project
+
+Revise your map from last week based on our in-class feedback. Submit both a still image of your map from `ggplot()` and create an interactive version of the map with `leaflet()` to show off in class next week.
