@@ -1,0 +1,73 @@
+---
+title: "Importance of Democracy Around the World"
+author: "Joe Ornstein"
+date: "9/22/2021"
+output: pdf_document
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+# this line of code ensures error messages don't get included in the final report
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+## R Markdown
+
+@foa2017 argue that there are worrying signs of "democratic deconsolidation", particularly among younger people, who are less likely to agree that living in a democracy is essential. In this report, we'll evaluate some evidence pertaining to that claim from Wave 7 of the World Values Survey [@inglehart2020].
+
+```{r}
+library(tidyverse)
+```
+
+## Importing Data
+
+First, we'll load the [World Values Survey dataset](https://www.worldvaluessurvey.org/wvs.jsp), which I've saved in the `data/raw` folder of my R project workspace. R Markdown always looks for files relative to the folder where it is saved, which can sometimes be a pain. For example, this .Rmd file is in the `R/week-06/` folder, but I want to load a data file in the `data/raw/` folder. The `here()` function is useful, because it tells R to look for things relative to your `.Rproj` file instead (you'll need to install the `here` package if you don't have it).
+
+```{r import-data, echo = TRUE}
+library(here)
+
+load( here( 'data/raw/WVS_Cross-National_Wave_7_R_v2_0.RData' ) )
+
+```
+
+## Cleaning the Data
+
+Next, I'll tidy up the data, creating a decade of birth variable, and filtering only respondents from the countries we want to analyze. The relevant variables here are `Q250` (the importance of democracy score), `Q261` (year of birth), and `C_COW_ALPHA` (country code).
+
+```{r}
+wvs <- `WVS_Cross-National_Wave_7_v2_0` %>% 
+  select(country = C_COW_ALPHA,
+         birthyear = Q261,
+         importance_of_democracy = Q250) %>%
+  # filter out the missing values
+  filter(importance_of_democracy > 0) %>% 
+  filter(birthyear >= 1930 & birthyear < 2000) %>% 
+  # create birth_decade column
+  mutate(birth_decade = case_when(birthyear < 1940 ~ '30s',
+                                  birthyear < 1950 ~ '40s',
+                                  birthyear < 1960 ~ '50s',
+                                  birthyear < 1970 ~ '60s',
+                                  birthyear < 1980 ~ '70s',
+                                  birthyear < 1990 ~ '80s',
+                                  birthyear < 2000 ~ '90s'))
+```
+
+## Plots
+
+```{r, fig.height=12, fig.width = 10}
+wvs %>% 
+  group_by(country, birth_decade) %>% 
+  # percent who responded 10 equal to the count of all people who responded with a 10, divided by the number of people in each category, times 100
+  summarize(pct_10 = sum(importance_of_democracy == 10) / n() * 100) %>% 
+  ggplot(mapping = aes(x=birth_decade, y=pct_10, group = country)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~country, ncol = 6) +
+  theme_minimal() +
+  labs(x = 'Birth Decade', 
+       y = 'Percent Who Believe Democracy is Essential', 
+       caption = 'Data from World Values Survey Wave 7', 
+       title = 'Who Likes Democracy?')
+```
+
+## References

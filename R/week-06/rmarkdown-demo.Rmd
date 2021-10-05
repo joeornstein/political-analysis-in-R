@@ -1,5 +1,5 @@
 ---
-title: "R Markdown Demo"
+title: "R Markdown Demonstration"
 author: "Joe Ornstein"
 date: "9/22/2021"
 output: pdf_document
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 This is an R Markdown document. It's great for writing a report along with your code so that everything is in one place. When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks [@foa2017] within the document. You can embed an R code chunk like this:
 
-```{r cars}
+```{r}
 library(tidyverse)
 ```
 
@@ -29,7 +29,6 @@ library(here)
 load( here( 'data/county-results-2020.RData' ) )
 
 ```
-
 
 ## Including Plots
 
