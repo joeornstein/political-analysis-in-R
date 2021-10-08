@@ -29,6 +29,8 @@ navbar:
           href: week-07.html
         - text: "Week 8: Interactive Maps"
           href: week-08.html
+        - text: "Week 11: Text-As-Data"
+          href: week-11.html
     - icon: fas fa-calendar-plus
       href: https://calendly.com/jornstein/15min
     - icon: fas fa-book-open

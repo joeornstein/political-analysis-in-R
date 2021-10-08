@@ -1,0 +1,29 @@
+---
+title: "Week 11"
+description: |
+  Text As Data
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+options(tigris_use_cache = TRUE)
+```
+
+## Getting Twitter Data
+
+To get data from Twitter, we need to sign up for their API (Application Programming Interface). That will allow us to import tweets directly into `R`.
+
+But getting set up with the API is a bit of a hassle. The following directions are, to the best of my knowledge, the most pain-free way to do it:
+
+
+1. Apply for a Twitter developer account [here](https://developer.twitter.com/). If you already have a personal account, you can login with that username and password, or create a new account.
+
+2. Complete the application for a standard developer account. In the application, tell them that you're taking an undergraduate data science class at the University of Georgia, and you'll be using the Twitter developer account to search for Tweets through the API and conduct basic text-as-data analysis, including tokenization, visualization, and sentiment analysis. You do not plan to Tweet, Retweet, or Like anything using your developer account, and you do not plan to display Twitter content off of Twitter.
+
+3. You may receive an email from Twitter asking you additional questions. I responded to this email by politely reiterating what I told them the application, and the application was approved shortly thereafter!
+
+4. Create an "app". Instructions [here](https://cran.r-project.org/web/packages/rtweet/vignettes/auth.html).
+
+5. Create your API token and secret keys. These are your unique "passwords" for accessing the API. Within your app, click the "keys and tokens" tab. Copy your Consumer API keys. Scroll down to "Access token & access token secret." Click create, and copy the two strings that are generated (copy them now or you'll need to go through this process again!)
+
+And then you're ready to begin!
