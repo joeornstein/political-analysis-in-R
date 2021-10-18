@@ -31,6 +31,8 @@ navbar:
           href: week-08.html
         - text: "Week 9: Mid-semester Stuff"
           href: week-09.html
+        - text: "Week 10: Time"
+          href: week-10.html
         - text: "Week 11: Text-As-Data"
           href: week-11.html
     - icon: fas fa-calendar-plus
