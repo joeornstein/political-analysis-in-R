@@ -21,7 +21,7 @@ library(gapminder)
 head(gapminder)
 ```
 
-Notice that the `gapminder` dataset has country-level data on life expectancy, population, and GDP per capita every five years between `r max(gapminder$year` and `r max(gapminder$year)`. So when you plot it all together, it looks like this:
+Notice that the `gapminder` dataset has country-level data on life expectancy, population, and GDP per capita every five years between `r max(gapminder$year)` and `r max(gapminder$year)`. So when you plot it all together, it looks like this:
 
 ```{r}
 p <- ggplot(data = gapminder,
