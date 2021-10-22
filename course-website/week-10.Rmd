@@ -10,11 +10,113 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 This week, we discuss how to work with datasets that include information from multiple time periods.
 
+## Example Code
+
+Let's look at the relationship between national income and life expectancy in the `gapminder` dataset. Do people in wealthier countries live longer on average?
+
+```{r}
+library(tidyverse)
+library(gapminder)
+
+head(gapminder)
+```
+
+Notice that the `gapminder` dataset has country-level data on life expectancy, population, and GDP per capita every five years between `r max(gapminder$year` and `r max(gapminder$year)`. So when you plot it all together, it looks like this:
+
+```{r}
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp,
+                          color = continent,
+                          size = pop)) +
+  geom_point(alpha = 0.5) +
+  scale_x_log10(labels = scales::dollar) +
+  scale_size_continuous(labels = scales::comma,
+                        breaks = c(1e5, 5e5,
+                                   1e6, 5e6,
+                                   5e7, 2e8,
+                                   1e9)) +
+  theme_minimal() + 
+  labs(x = 'GDP Per Capita',
+       y = 'Life Expectancy',
+       color = 'Continent',
+       size = 'Population',
+       title = 'The Health and Wealth of Nations')
+
+p
+```
+
+It looks like a strong relationship between wealth and health, but maybe it's just that both GDP and life expectancy have been increasing over time, which causes a *spurious correlation*. Like plotting [US margarine consumption and the divorce rates](https://tylervigen.com/view_correlation?id=1703) over time. To be sure we know what's going on, we want to take a few precautions.
+
+### Solution 1: Look at Cross-Sections
+
+Instead of plotting all the data at once, just filter out a single year and see if there's a relationship. This is called taking a **cross-section**.
+
+```{r}
+ggplot(data = filter(gapminder, year == 2007),
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp,
+                          color = continent,
+                          size = pop)) +
+  geom_point(alpha = 0.5) +
+  scale_x_log10(labels = scales::dollar) +
+  scale_size_continuous(labels = scales::comma,
+                        breaks = c(1e5, 5e5,
+                                   1e6, 5e6,
+                                   5e7, 2e8,
+                                   1e9)) +
+  theme_minimal() + 
+  labs(x = 'GDP Per Capita',
+       y = 'Life Expectancy',
+       color = 'Continent',
+       size = 'Population',
+       title = 'The Health and Wealth of Nations (2007)')
+```
+
+Still a relationship!
+
+### Solution 2: Look at a time series
+
+Instead of looking at all the countries at once, let's isolate a single country and see what's happening to its GDP and life expectancy over time. The `geom_path()` layer connects points based on their order in the dataset (rather than their order on the x-axis like `geom_line()`).
+
+```{r}
+ggplot(data = filter(gapminder, country == 'Poland'),
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp,
+                          label = year)) +
+  geom_text() +
+  geom_path() +
+  scale_x_log10(labels = scales::dollar) +
+  scale_size_continuous(labels = scales::comma,
+                        breaks = c(1e5, 5e5,
+                                   1e6, 5e6,
+                                   5e7, 2e8,
+                                   1e9)) +
+  theme_minimal() + 
+  labs(x = 'GDP Per Capita',
+       y = 'Life Expectancy',
+       color = 'Continent',
+       size = 'Population',
+       title = 'The Health and Wealth of Poland')
+```
+
+### Solution 3: Make a movie!
+
+Why *just* look at a cross-section or a time series, when you can do both simultaneously? Take that original plot object `p` and make the dots move over time:
+
+```{r}
+library(gganimate)
+
+p + transition_time(time = year)
+```
+
+Now we can see the trajectory of individual countries over time (check out China - the big one!) and verify that the relationship between health and wealth is positive from the 1950s all the way to today.
+
 ## Reading Assignments
 
 Next week, text as data! The following tutorial is your guide to the `tidytext` package, and make you've completed the instructions to sign up for the [Twitter API](https://joeornstein.github.io/pols-3230/week-11.html#getting-twitter-data).
 
-- [Text Mining with Tidy Data Principles](https://juliasilge.shinyapps.io/learntidytext/#section-introduction)
+-   [Text Mining with Tidy Data Principles](https://juliasilge.shinyapps.io/learntidytext/#section-introduction)
 
 ## Team Project
 
