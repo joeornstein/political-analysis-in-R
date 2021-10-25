@@ -76,3 +76,10 @@ d <- left_join(d, sentiments, by = 'word')
 # scroll through and see if the results make sense to you!
 
 
+d %>% 
+  filter(!is.na(sentiment)) %>% 
+  group_by(last_name, first_name) %>% 
+  summarize(count_negative = sum(sentiment == 'negative'),
+            count_positive = sum(sentiment == 'positive')) %>% 
+  mutate(score = count_positive - count_negative)
+
