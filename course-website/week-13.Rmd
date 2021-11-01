@@ -1,0 +1,18 @@
+---
+title: "Weeks 13-15"
+description: |
+  Topics By Popular Demand + Final Projects
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+```
+
+In the final three weeks of class, we will set aside time for bonus topics and final projects. If there is any particular topic or dataset you would like to look at in our final weeks, please complete the form below.
+
+```{r}
+knitr::include_url('https://docs.google.com/forms/d/e/1FAIpQLScc68rTkXYbZF6eqYMAYrzlm6mNJRXRWGFlNbe2k4fql1bRyw/viewform?usp=sf_link')
+```
+
+We will also take a day to collectively work on a grading rubric for the final projects, which I will post here when it is completed.

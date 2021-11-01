@@ -33,8 +33,10 @@ navbar:
           href: week-09.html
         - text: "Week 10: Time"
           href: week-10.html
-        - text: "Week 11: Text-As-Data"
+        - text: "Weeks 11-12: Text-As-Data"
           href: week-11.html
+        - text: "Weeks 13-15: Final Projects"
+          href: week-13.html
     - icon: fas fa-calendar-plus
       href: https://calendly.com/jornstein/15min
     - icon: fas fa-book-open
