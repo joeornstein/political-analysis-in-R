@@ -27,3 +27,7 @@ But getting set up with the API is a bit of a hassle. The following directions a
 5. Create your API token and secret keys. These are your unique "passwords" for accessing the API. Within your app, click the "keys and tokens" tab. Copy your Consumer API keys. Scroll down to "Access token & access token secret." Click create, and copy the two strings that are generated (copy them now or you'll need to go through this process again!)
 
 And then you're ready to begin!
+
+## Team Project
+
+Import text data from Twitter through the API and conduct a topic and/or sentiment analysis. Create a visualization to illustrate your results. Submit your R script and image files to eLC.
