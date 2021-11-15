@@ -17,14 +17,14 @@ load('cable-news-transcripts.RData')
 # get a list of hosts
 hosts <- unique(d$host)
 
-# tokenize, remove stop words, 
-# join with sentiment lexicon
-# and get the most frequent words by host
+# tokenize
 tidied_text <- unnest_tokens(d,
                              input = transcript,
                              output = word) %>% 
+    # join with sentiment lexicon
     anti_join(get_stopwords()) %>% 
     inner_join(get_sentiments('bing')) %>% 
+    # and get the most frequent words by host
     group_by(host) %>% 
     count(word, sort = TRUE) %>% 
     # filter out some words whose sentiment score is problematic
